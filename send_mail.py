@@ -2,7 +2,7 @@ import smtplib, ssl
 import os
 from email.mime.text import MIMEText
 
-def send_mail(message):
+def send_mail(message, subject):
     host = "smtp.gmail.com"
     port = 465
     context = ssl.create_default_context()
@@ -17,7 +17,7 @@ def send_mail(message):
     msg = MIMEText(message, 'plain', 'utf-8')
     msg['From'] = username
     msg['To'] = receiver
-    msg['Subject'] = "Test Email from Python"
+    msg['Subject'] = subject
 
     try:
         with smtplib.SMTP_SSL(host, port, context=context) as server:
@@ -31,4 +31,5 @@ def send_mail(message):
 
 if __name__ == "__main__":
     message = "This is a test message from send_mail applet"  # Can include smart quotes like ’
+    subject = "Test message from send_mail"
     send_mail(message)

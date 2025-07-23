@@ -14,8 +14,9 @@ message = ""
 
 # Access the article data
 for article in content["articles"]:
-    message += str(article["title"]) + "\n"
-    message += str(article["author"]) + "\n"
-    message += str(article["description"]) + "\n\n"
+    if article["title"] is not None:
+        if article["author"] is not None:
+            if article["description"] is not None:
+                message += article["title"] + "\n" + article["author"] + "\n" + article["description"] + "\n\n"
 
-send_mail(message)
+send_mail(message, "brainfra.me Science News Blast")
